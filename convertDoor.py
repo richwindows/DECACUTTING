@@ -17,6 +17,18 @@ def get_material_color_suffix(note_value):
             return '-AL'
     return '-WH'
 
+def get_material_color_suffix(color_value):
+    """
+    根据颜色值确定材料颜色后缀
+    默认返回-WH，如果颜色为Black返回-BL，为Almond返回-AL
+    """
+    if color_value == 'Black':
+        return '-BL'
+    elif color_value == 'Almond':
+        return '-AL'
+    else:
+        return '-WH'
+
 def process_file(xlsm_file):
     # 获取文件名（不包含路径）
     file_name = os.path.basename(xlsm_file)
@@ -144,7 +156,7 @@ def process_file(xlsm_file):
 
 
 
-        # 从J列第4行开始遍历并写入��入130-01|
+        # 从J列第4行开始遍历并写入写入130-01|
         for row in range(4, frame_sheet.max_row + 1):
             frame_length_value = frame_sheet[f"J{row}"].value
             door_id_value = frame_sheet[f"B{row}"].value
@@ -319,53 +331,9 @@ def process_file(xlsm_file):
 
 
                 if material_pcs == 4:
-                    writer.writerow([batch_value] + [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [door_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [door_style_value] + [door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] * 5 + [door_note_value] + [door_customer_Value])
                     writer.writerow([batch_value] + [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [door_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [door_style_value] + [door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] * 5 + [door_note_value] + [door_customer_Value])  
                 else:
                     writer.writerow([batch_value] + [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [door_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [door_style_value] + [door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] * 5 + [door_note_value] + [door_customer_Value])
-        
-
-        # 从N列第4行开始遍历并写入写入130-02|
-        for row in range(4, frame_sheet.max_row + 1):
-            frame_length_value = frame_sheet[f"N{row}"].value
-            door_id_value = frame_sheet[f"B{row}"].value
-            door_style_value = frame_sheet[f"C{row}"].value
-            #door_pcs_value = frame_sheet[f"G{row}"].value
-            material_name = 'HMST130-02'
-            material_pcs = frame_sheet[f"O{row}"].value
-
-            if frame_length_value is not None:
-
-                # 在Info sheet中匹配door_id_value，并获取相应的行数
-                for info_row in range(2, info_sheet.max_row + 1):
-                    info_id = info_sheet[f"B{info_row}"].value
-                    if info_id == door_id_value:
-                        # 设置变量Info_ID_Line为匹配行数
-                        Info_ID_Line = info_row
-                        # 设置变量door_customer_Value为该行第A列数据
-                        door_customer_Value = info_sheet[f"A{info_row}"].value
-                        # 设置变量door_width_value为该行第D列内容
-                        door_width_value = info_sheet[f"D{info_row}"].value
-                        # 设置变量door_height_value为该行第E列内容
-                        door_height_value = info_sheet[f"E{info_row}"].value
-                        # 设置变量door_frame_value为该行第F列内容
-                        door_frame_value = info_sheet[f"F{info_row}"].value
-                        # 设置变量door_glass_value为该行G列内容
-                        door_glass_value = info_sheet[f"G{info_row}"].value
-                        # 设置变量door_Argon_value为该行第H列内容
-                        door_Argon_value = info_sheet[f"H{info_row}"].value
-                        # 设置变量door_grid_value为该行第I列内容
-                        door_grid_value = info_sheet[f"I{info_row}"].value
-                        # 设置变量door_note_value为该行第K列内容
-                        door_note_value = info_sheet[f"K{info_row}"].value
-                        break
-
-
-                if material_pcs == 4:
-                    writer.writerow([batch_value] + [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [door_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [door_style_value] + [door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] * 5 + [door_note_value] + [door_customer_Value])
-                    writer.writerow([batch_value] + [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [door_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [door_style_value] + [door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] * 5 + [door_note_value] + [door_customer_Value])  
-                else:
-                    writer.writerow([batch_value] + [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [door_id_value] + [""] * 1 + ["Left+Right"] + [""] * 3 + [door_style_value] + [door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] * 5 + [door_note_value] + [door_customer_Value])
         
 
 
