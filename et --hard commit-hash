@@ -1,0 +1,20 @@
+[33mde9bf73[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m chore: remove Pipfile as it's no longer needed
+[33m841f0d4[m refactor(app): move material length logic to settings module and add error handling
+[33mf20a852[m refactor(api): optimize material length calculation and combination logic
+[33m83ab357[m refactor(app): migrate from streamlit to flask for web deployment
+[33m707eeec[m refactor(vercel): move app.py to api directory and update vercel config
+[33m4bf94c4[m build: update python runtime version in vercel config
+[33m526775b[m refactor(ui): simplify CSS and streamline UI components
+[33mcd20dbc[m build: update dependencies and simplify vercel config
+[33mae6715c[m build: update dependencies and vercel config
+[33mb58bac3[m build(vercel): update vercel config and remove unused app.spec
+[33mb235884[m feat: migrate desktop app to web-based streamlit interface
+[33m26f8631[m Remove large files and add .gitignore
+[33mea705c1[m first commit
+[33meea2706[m first commit
+[33m73c6305[m first commit
+[33m80fb32d[m first commit
+[33m3bb3dae[m first commit
+[33m9b121ac[m chore: remove .gitignore file for __pycache__
+[33m8bb9a5b[m chore: remove build artifacts and temporary files
+[33m98938b7[m feat: add DECACuttingTool application with material settings and processing logic
