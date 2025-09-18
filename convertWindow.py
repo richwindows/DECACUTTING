@@ -34,7 +34,7 @@ def process_file(xlsm_file):
     # 创建一个临时CSV文件
     temp_csv_file = os.path.join(os.path.dirname(xlsm_file), f"temp_{os.path.splitext(file_name)[0]}_CutFrame.csv")
 
-    with open(temp_csv_file, "w", encoding='utf-8-sig', newline="") as csvfile:
+    with open(temp_csv_file, "w", encoding='utf-8', newline="") as csvfile:
         writer = csv.writer(csvfile, dialect="excel")
         writer.writerow(header)
 

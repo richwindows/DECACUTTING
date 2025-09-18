@@ -549,7 +549,7 @@ def main():
             
             with download_col2:
                 # CSV下载
-                csv_data = result_df.to_csv(index=False, encoding='utf-8-sig')
+                csv_data = result_df.to_csv(index=False, encoding='utf-8')
                 csv_filename = f"{os.path.splitext(processed_filename)[0]}_CutFrame.csv"
                 st.download_button(
                     label="📄 下载CSV文件",
