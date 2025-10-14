@@ -2,7 +2,6 @@ from http.server import BaseHTTPRequestHandler
 import json
 import tempfile
 import os
-import pandas as pd
 from collections import defaultdict
 import logging
 import traceback
@@ -80,7 +79,7 @@ class handler(BaseHTTPRequestHandler):
             
             # Get material color suffix function
             def get_material_color_suffix(color_value):
-                if pd.isna(color_value) or color_value == '':
+                if color_value is None or color_value == '':
                     return ''
                 color_str = str(color_value).strip().upper()
                 if color_str in ['WHITE', 'BLANC']:
@@ -127,7 +126,7 @@ class handler(BaseHTTPRequestHandler):
                     except (IndexError, TypeError, ValueError):
                         continue
             
-            return pd.DataFrame(data_rows)
+            return data_rows
             
         except Exception as e:
             raise Exception(f"Error processing window file: {str(e)}")
@@ -140,7 +139,7 @@ class handler(BaseHTTPRequestHandler):
             
             # Get material color suffix function
             def get_material_color_suffix(color_value):
-                if pd.isna(color_value) or color_value == '':
+                if color_value is None or color_value == '':
                     return ''
                 color_str = str(color_value).strip().upper()
                 if color_str in ['WHITE', 'BLANC']:
@@ -187,7 +186,7 @@ class handler(BaseHTTPRequestHandler):
                     except (IndexError, TypeError, ValueError):
                         continue
             
-            return pd.DataFrame(data_rows)
+            return data_rows
             
         except Exception as e:
             raise Exception(f"Error processing door file: {str(e)}")
@@ -205,41 +204,41 @@ class handler(BaseHTTPRequestHandler):
         }
         return default_lengths.get(material_name, 6000)
 
-    def process_cutting_data(self, df):
+    def process_cutting_data(self, data_rows):
         """Process cutting data with optimization"""
-        if df.empty:
-            return df
+        if not data_rows:
+            return data_rows
             
         # Add cutting optimization logic
         df_expanded = []
         
-        for _, row in df.iterrows():
+        for row in data_rows:
             quantity = int(row.get('Quantity', 1))
             for i in range(quantity):
                 new_row = row.copy()
                 new_row['Piece_ID'] = f"{row.get('Type', 'Item')}_{len(df_expanded) + 1}"
                 df_expanded.append(new_row)
         
-        df_expanded = pd.DataFrame(df_expanded)
-        
         # Apply cutting optimization
-        optimized_df = self.find_best_combination(df_expanded)
+        optimized_data = self.find_best_combination(df_expanded)
         
-        return optimized_df
+        return optimized_data
 
-    def find_best_combination(self, df):
+    def find_best_combination(self, data_rows):
         """Find best cutting combination"""
-        if df.empty:
-            return df
+        if not data_rows:
+            return data_rows
             
         # Group by material type
-        material_groups = df.groupby('Material')
+        material_groups = defaultdict(list)
+        for row in data_rows:
+            material_groups[row['Material']].append(row)
+            
         result_rows = []
         cutting_id = 1
         
-        for material, group in material_groups:
+        for material, pieces in material_groups.items():
             material_length = self.get_material_length(material)
-            pieces = group.to_dict('records')
             
             # Simple bin packing algorithm
             current_cut = []
@@ -276,15 +275,20 @@ class handler(BaseHTTPRequestHandler):
                     result_rows.append(cut_piece)
                 cutting_id += 1
         
-        return pd.DataFrame(result_rows)
+        return result_rows
 
-    def calculate_material_usage(self, df):
+    def calculate_material_usage(self, data_rows):
         """Calculate material usage statistics"""
-        if df.empty or 'Used_Length' not in df.columns or 'Material_Length' not in df.columns:
+        if not data_rows:
             return 0
             
-        total_used = df['Used_Length'].sum()
-        total_available = df['Material_Length'].sum()
+        total_used = 0
+        total_available = 0
+        
+        for row in data_rows:
+            if 'Used_Length' in row and 'Material_Length' in row:
+                total_used += row['Used_Length']
+                total_available += row['Material_Length']
         
         return round((total_used / total_available * 100), 2) if total_available > 0 else 0
 
