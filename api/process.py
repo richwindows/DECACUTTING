@@ -53,11 +53,11 @@ class handler(BaseHTTPRequestHandler):
             response_data = {
                 'success': True,
                 'data': {
-                    'rows': optimized_data.to_dict('records'),
-                    'columns': list(optimized_data.columns),
+                    'rows': optimized_data,  # optimized_data is already a list of dictionaries
+                    'columns': ['Width', 'Height', 'Color', 'Quantity', 'Material', 'Type', 'Cutting ID', 'Sheet ID'] if optimized_data else [],
                     'stats': {
                         'total_pieces': len(optimized_data),
-                        'total_cuts': len(optimized_data['Cutting ID'].unique()) if 'Cutting ID' in optimized_data.columns else 0,
+                        'total_cuts': len(set(row.get('Cutting ID', '') for row in optimized_data if row.get('Cutting ID'))),
                         'material_usage': self.calculate_material_usage(optimized_data)
                     }
                 },
