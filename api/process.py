@@ -12,10 +12,26 @@ import openpyxl
 import pandas as pd
 import numpy as np
 
-# Add the current directory to Python path for imports
+# Add the parent directory to Python path for imports
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
+
+# Import modules at the top level to avoid import issues in Vercel
+try:
+    import convertWindow
+    import convertDoor
+    from app import process_cutting_data
+except ImportError as e:
+    logging.error(f"Import error: {e}")
+    # Fallback imports for Vercel environment
+    sys.path.append('/var/task')
+    try:
+        import convertWindow
+        import convertDoor
+        from app import process_cutting_data
+    except ImportError as e2:
+        logging.error(f"Fallback import error: {e2}")
 
 class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
@@ -70,14 +86,11 @@ class handler(BaseHTTPRequestHandler):
             try:
                 # Process the file based on type
                 if process_type == 'Windows':
-                    import convertWindow
                     df, _ = convertWindow.process_file(tmp_file_path)
                 else:  # Door
-                    import convertDoor
                     df, _ = convertDoor.process_file(tmp_file_path)
                 
                 # Process cutting data
-                from app import process_cutting_data
                 success, message, result_df = process_cutting_data(df)
                 
                 if not success:
