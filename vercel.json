@@ -1,14 +1,14 @@
 {
-  "builds": [
-    {
-      "src": "api/process.py",
-      "use": "@vercel/python"
+  "functions": {
+    "api/process.py": {
+      "runtime": "python3.9",
+      "maxDuration": 30
     },
-    {
-      "src": "api/download.py", 
-      "use": "@vercel/python"
+    "api/download.py": {
+      "runtime": "python3.9", 
+      "maxDuration": 15
     }
-  ],
+  },
   "routes": [
     {
       "src": "/api/process",
@@ -22,13 +22,5 @@
       "src": "/(.*)",
       "dest": "/$1"
     }
-  ],
-  "functions": {
-    "api/process.py": {
-      "maxDuration": 30
-    },
-    "api/download.py": {
-      "maxDuration": 15
-    }
-  }
+  ]
 }
