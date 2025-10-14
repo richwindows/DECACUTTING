@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DECA 智能切割工具</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="main-title">🔧 DECA 智能切割工具</h1>
+                <p class="subtitle">专业的门窗材料切割优化解决方案</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <div class="content-grid">
+                    <!-- Upload Section -->
+                    <div class="upload-section">
+                        <div class="section-header">
+                            <h3>📁 智能文件处理</h3>
+                            <p>上传Excel文件，开始切割优化</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="processType">🎯 选择处理类型</label>
+                            <select id="processType" class="select-input">
+                                <option value="Windows">Windows</option>
+                                <option value="Door">Door</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fileInput">📎 上传Excel文件</label>
+                            <div class="file-upload-area" id="fileUploadArea">
+                                <input type="file" id="fileInput" accept=".xlsx,.xls,.xlsm" hidden>
+                                <div class="upload-placeholder">
+                                    <div class="upload-icon">📁</div>
+                                    <p>点击选择文件或拖拽文件到此处</p>
+                                    <small>支持格式：.xlsx, .xls, .xlsm</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="processBtn" class="process-btn" disabled>
+                            🚀 开始智能处理
+                        </button>
+                    </div>
+
+                    <!-- Status Section -->
+                    <div class="status-section">
+                        <div class="section-header">
+                            <h3>📊 处理状态</h3>
+                            <p>实时监控处理进度</p>
+                        </div>
+
+                        <div id="statusCard" class="status-card waiting">
+                            <div class="status-icon">⚠️</div>
+                            <div class="status-title">等待文件上传</div>
+                            <div class="status-message">请在左侧选择并上传Excel文件</div>
+                        </div>
+
+                        <div id="fileInfo" class="file-info" style="display: none;">
+                            <div class="info-item">
+                                <strong>文件:</strong> <span id="fileName"></span>
+                            </div>
+                            <div class="info-item">
+                                <strong>类型:</strong> <span id="fileType"></span>
+                            </div>
+                            <div class="info-item">
+                                <strong>大小:</strong> <span id="fileSize"></span>
+                            </div>
+                        </div>
+
+                        <div id="progressBar" class="progress-bar" style="display: none;">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="results-section" style="display: none;">
+                    <div class="section-header">
+                        <h2>📈 处理结果</h2>
+                        <p>智能切割优化完成，查看详细结果</p>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-title">📊 总行数</div>
+                            <div class="metric-value" id="totalRows">0</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-title">🏗️ 材料种类</div>
+                            <div class="metric-value" id="materialTypes">0</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-title">✂️ 切割组数</div>
+                            <div class="metric-value" id="cuttingGroups">0</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-title">📏 总长度</div>
+                            <div class="metric-value" id="totalLength">0mm</div>
+                        </div>
+                    </div>
+
+                    <div class="data-preview">
+                        <h3>📋 数据预览</h3>
+                        <p>显示前10行处理结果</p>
+                        <div id="dataTable" class="data-table"></div>
+                    </div>
+
+                    <div class="download-section">
+                        <h3>📥 下载处理结果</h3>
+                        <p>选择您需要的文件格式进行下载</p>
+                        <div class="download-buttons">
+                            <button id="downloadExcel" class="download-btn excel">
+                                📊 下载Excel文件
+                            </button>
+                            <button id="downloadCSV" class="download-btn csv">
+                                📄 下载CSV文件
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-title">🔧 DECA 智能切割工具</div>
+                    <div class="footer-subtitle">专业 · 高效 · 智能</div>
+                </div>
+                <div class="footer-divider"></div>
+                <div class="footer-section">
+                    <div class="footer-version">版本 2.0 | Web版</div>
+                    <div class="footer-copyright">© 2024 DECA Technology</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>🔄 正在进行智能切割优化，请稍候...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

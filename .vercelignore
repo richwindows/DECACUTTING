@@ -21,3 +21,4 @@ et --hard commit-hash
 app.spec
 .devcontainer/
 static/
+app.py
