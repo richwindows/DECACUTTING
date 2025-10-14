@@ -106,10 +106,16 @@ class handler(BaseHTTPRequestHandler):
                         
                     # Extract relevant data (adjust column indices based on your Excel structure)
                     try:
-                        width = row[0] if row[0] is not None else 0
-                        height = row[1] if row[1] is not None else 0
-                        color = row[2] if len(row) > 2 else ''
-                        quantity = row[3] if len(row) > 3 and row[3] is not None else 1
+                        width = float(row[0]) if row[0] is not None and str(row[0]).replace('.', '').replace('-', '').isdigit() else 0
+                        height = float(row[1]) if row[1] is not None and str(row[1]).replace('.', '').replace('-', '').isdigit() else 0
+                        color = str(row[2]) if len(row) > 2 and row[2] is not None else ''
+                        
+                        # Handle quantity - ensure it's a valid number
+                        quantity_val = row[3] if len(row) > 3 and row[3] is not None else 1
+                        try:
+                            quantity = int(float(str(quantity_val))) if str(quantity_val).replace('.', '').replace('-', '').isdigit() else 1
+                        except (ValueError, TypeError):
+                            quantity = 1
                         
                         if width > 0 and height > 0:
                             color_suffix = get_material_color_suffix(color)
@@ -123,7 +129,9 @@ class handler(BaseHTTPRequestHandler):
                                 'Material': material_name,
                                 'Type': 'Window'
                             })
-                    except (IndexError, TypeError, ValueError):
+                    except (IndexError, TypeError, ValueError) as e:
+                        # Log the problematic row for debugging
+                        logging.warning(f"Skipping row due to parsing error: {row}, Error: {str(e)}")
                         continue
             
             return data_rows
@@ -166,10 +174,16 @@ class handler(BaseHTTPRequestHandler):
                         
                     # Extract relevant data (adjust column indices based on your Excel structure)
                     try:
-                        width = row[0] if row[0] is not None else 0
-                        height = row[1] if row[1] is not None else 0
-                        color = row[2] if len(row) > 2 else ''
-                        quantity = row[3] if len(row) > 3 and row[3] is not None else 1
+                        width = float(row[0]) if row[0] is not None and str(row[0]).replace('.', '').replace('-', '').isdigit() else 0
+                        height = float(row[1]) if row[1] is not None and str(row[1]).replace('.', '').replace('-', '').isdigit() else 0
+                        color = str(row[2]) if len(row) > 2 and row[2] is not None else ''
+                        
+                        # Handle quantity - ensure it's a valid number
+                        quantity_val = row[3] if len(row) > 3 and row[3] is not None else 1
+                        try:
+                            quantity = int(float(str(quantity_val))) if str(quantity_val).replace('.', '').replace('-', '').isdigit() else 1
+                        except (ValueError, TypeError):
+                            quantity = 1
                         
                         if width > 0 and height > 0:
                             color_suffix = get_material_color_suffix(color)
@@ -183,7 +197,9 @@ class handler(BaseHTTPRequestHandler):
                                 'Material': material_name,
                                 'Type': 'Door'
                             })
-                    except (IndexError, TypeError, ValueError):
+                    except (IndexError, TypeError, ValueError) as e:
+                        # Log the problematic row for debugging
+                        logging.warning(f"Skipping row due to parsing error: {row}, Error: {str(e)}")
                         continue
             
             return data_rows
@@ -213,7 +229,11 @@ class handler(BaseHTTPRequestHandler):
         df_expanded = []
         
         for row in data_rows:
-            quantity = int(row.get('Quantity', 1))
+            try:
+                quantity = int(float(str(row.get('Quantity', 1)))) if str(row.get('Quantity', 1)).replace('.', '').replace('-', '').isdigit() else 1
+            except (ValueError, TypeError):
+                quantity = 1
+                
             for i in range(quantity):
                 new_row = row.copy()
                 new_row['Piece_ID'] = f"{row.get('Type', 'Item')}_{len(df_expanded) + 1}"
