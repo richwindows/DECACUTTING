@@ -338,6 +338,9 @@ def process_file(xlsm_file):
 
 
 # 在临时CSV文件写入完成后，添加排序逻辑
+    # 关闭workbook以释放文件句柄
+    workbook.close()
+    
     df = pd.read_csv(temp_csv_file)
     df_sorted = df.sort_values(by=['Material Name', 'Qty', 'Length'], ascending=[True, True, False])
     

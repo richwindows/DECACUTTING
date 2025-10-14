@@ -60,6 +60,17 @@ def process_file(xlsm_file):
             base_material_name = 'HMST82-02B'
             material_pcs = frame_sheet[f"D{row}"].value
 
+            # 初始化所有变量，避免未定义错误
+            Info_ID_Line = None
+            window_customer_Value = ""
+            window_width_value = ""
+            window_height_value = ""
+            window_frame_value = ""
+            window_glass_value = ""
+            window_Argon_value = ""
+            window_grid_value = ""
+            window_note_value = ""
+
             if frame_length_value is not None:
 
                 # 在Info sheet中匹配window_id_value，并获取相应的行数
@@ -150,6 +161,17 @@ def process_file(xlsm_file):
             base_material_name = 'HMST82-10'
             material_pcs = frame_sheet[f"H{row}"].value
 
+            # 初始化所有变量，避免未定义错误
+            Info_ID_Line = None
+            window_customer_Value = ""
+            window_width_value = ""
+            window_height_value = ""
+            window_frame_value = ""
+            window_glass_value = ""
+            window_Argon_value = ""
+            window_grid_value = ""
+            window_note_value = ""
+
             if frame_length_value is not None:
 
                 # 在Info sheet中匹配window_id_value，并获取相应的行数
@@ -192,6 +214,17 @@ def process_file(xlsm_file):
             window_color_value = frame_sheet[f"O{row}"].value
             base_material_name = 'HMST82-10'
             material_pcs = frame_sheet[f"J{row}"].value
+
+            # 初始化所有变量，避免未定义错误
+            Info_ID_Line = None
+            window_customer_Value = ""
+            window_width_value = ""
+            window_height_value = ""
+            window_frame_value = ""
+            window_glass_value = ""
+            window_Argon_value = ""
+            window_grid_value = ""
+            window_note_value = ""
 
             if frame_length_value is not None:
 
@@ -236,6 +269,17 @@ def process_file(xlsm_file):
             base_material_name = 'HMST82-01'
             material_pcs = frame_sheet[f"L{row}"].value
 
+            # 初始化所有变量，避免未定义错误
+            Info_ID_Line = None
+            window_customer_Value = ""
+            window_width_value = ""
+            window_height_value = ""
+            window_frame_value = ""
+            window_glass_value = ""
+            window_Argon_value = ""
+            window_grid_value = ""
+            window_note_value = ""
+
             if frame_length_value is not None:
 
                 # 在Info sheet中匹配window_id_value，并获取相应的行数
@@ -278,6 +322,17 @@ def process_file(xlsm_file):
             window_color_value = frame_sheet[f"O{row}"].value
             base_material_name = 'HMST82-01'
             material_pcs = frame_sheet[f"N{row}"].value
+
+            # 初始化所有变量，避免未定义错误
+            Info_ID_Line = None
+            window_customer_Value = ""
+            window_width_value = ""
+            window_height_value = ""
+            window_frame_value = ""
+            window_glass_value = ""
+            window_Argon_value = ""
+            window_grid_value = ""
+            window_note_value = ""
 
             if frame_length_value is not None:
 
@@ -556,6 +611,9 @@ def process_file(xlsm_file):
 
 
 # 在临时CSV文件写入完成后，添加排序逻辑
+    # 关闭workbook以释放文件句柄
+    workbook.close()
+    
     df = pd.read_csv(temp_csv_file)
     df_sorted = df.sort_values(by=['Material Name', 'Qty', 'Length'], ascending=[True, True, False])
     

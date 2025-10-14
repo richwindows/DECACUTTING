@@ -264,6 +264,37 @@ def process_cutting_data(df):
                 remaining = material_length - sum(best_combination) - (len(best_combination) - 1) * 4 - 6
                 logger.debug(f"切割 ID {cutting_id} 的最佳组合: {best_combination}，剩余长度: {remaining}")
                 
+                # 如果没有找到有效组合，处理剩余的单个长度
+                if not best_combination:
+                    if all_lengths:
+                        # 取第一个剩余长度单独处理
+                        single_length = all_lengths[0]
+                        logger.warning(f"无法找到最佳组合，单独处理长度: {single_length}")
+                        
+                        # 查找对应的行
+                        unprocessed_rows = material_group[
+                            (material_group['Length'] == single_length) & 
+                            (~material_group.index.isin(processed_rows))
+                        ]
+                        
+                        if not unprocessed_rows.empty:
+                            row = unprocessed_rows.iloc[0]
+                            key = (row['Material Name'], row['Qty'], row['Length'], row['Order No'], row['Bin No'])
+                            cutting_info[(material, qty)].append((key, cutting_id, 1, row['original_index']))
+                            
+                            processed_rows.add(row.name)
+                            all_lengths.remove(single_length)
+                            material_total_lengths[(material, qty)] += single_length
+                            
+                            logger.debug(f"添加单独切割信息: 材料={material}, 长度={single_length}, 切割ID={cutting_id}")
+                        else:
+                            # 如果找不到对应行，直接移除以避免无限循环
+                            all_lengths.remove(single_length)
+                            logger.warning(f"未找到长度为 {single_length} 的未处理行，直接移除")
+                    
+                    cutting_id += 1
+                    continue
+                
                 for pieces_id, length in enumerate(best_combination, 1):
                     unprocessed_rows = material_group[
                         (material_group['Length'] == length) & 
