@@ -1,0 +1,20 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.log
+cutting_process.log
+.DS_Store
+Thumbs.db
+*.tmp
+*.temp
+build/
+dist/
+.git/
+.gitignore
+README.md
+et --hard commit-hash
+09122025_CutFrame.csv
