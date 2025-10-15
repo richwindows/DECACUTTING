@@ -20,6 +20,5 @@ et --hard commit-hash
 09122025_CutFrame.csv
 app.spec
 .devcontainer/
-static/
-app.py
+local_server.py
 simple_server.py
