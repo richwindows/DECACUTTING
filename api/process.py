@@ -19,19 +19,27 @@ sys.path.insert(0, parent_dir)
 
 # Import modules at the top level to avoid import issues in Vercel
 try:
+    # Try importing from parent directory first
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
     import convertWindow
     import convertDoor
     from app import process_cutting_data
 except ImportError as e:
     logging.error(f"Import error: {e}")
     # Fallback imports for Vercel environment
-    sys.path.append('/var/task')
     try:
+        sys.path.append('/var/task')
+        sys.path.append('/var/runtime')
+        sys.path.append(os.path.dirname(os.path.dirname(__file__)))
         import convertWindow
         import convertDoor
         from app import process_cutting_data
     except ImportError as e2:
         logging.error(f"Fallback import error: {e2}")
+        # If imports still fail, we need to handle this gracefully
+        convertWindow = None
+        convertDoor = None
+        process_cutting_data = None
 
 class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
@@ -44,6 +52,11 @@ class handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         try:
+            # Check if required modules are available
+            if convertWindow is None or convertDoor is None or process_cutting_data is None:
+                self.send_error_response(500, "Required modules not available. Import error occurred.")
+                return
+                
             # Set CORS headers
             self.send_response(200)
             self.send_header('Access-Control-Allow-Origin', '*')
