@@ -1,28 +1,12 @@
 {
-  "version": 2,
   "functions": {
-    "api/*.py": {
+    "api/process.py": {
+      "runtime": "python3.11"
+    },
+    "api/download.py": {
       "runtime": "python3.11"
     }
   },
-  "builds": [
-    {
-      "src": "api/*.py",
-      "use": "@vercel/python"
-    },
-    {
-      "src": "*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.css",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "*.js",
-      "use": "@vercel/static"
-    }
-  ],
   "routes": [
     {
       "src": "/api/process",
