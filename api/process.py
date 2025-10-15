@@ -1,45 +1,59 @@
-from http.server import BaseHTTPRequestHandler
-import json
-import tempfile
-import os
 import sys
+import os
+import json
+import pandas as pd
+import numpy as np
+from http.server import BaseHTTPRequestHandler
+import cgi
+import tempfile
 from collections import defaultdict
 import logging
 import traceback
 from io import BytesIO
-import cgi
 import openpyxl
-import pandas as pd
-import numpy as np
 
-# Add the parent directory to Python path for imports
+# Add parent directory to path for imports
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 sys.path.insert(0, parent_dir)
 
-# Import modules at the top level to avoid import issues in Vercel
+# Add additional paths for Vercel environment
+possible_paths = [
+    parent_dir,
+    os.path.join(parent_dir, '..'),
+    '/var/task',
+    '/var/task/..',
+    os.path.dirname(os.path.dirname(__file__))
+]
+
+for path in possible_paths:
+    if path not in sys.path:
+        sys.path.insert(0, path)
+
+# Try to import required modules with graceful error handling
 try:
-    # Try importing from parent directory first
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
     import convertWindow
-    import convertDoor
-    from app import process_cutting_data
+    convertWindow_available = True
 except ImportError as e:
-    logging.error(f"Import error: {e}")
-    # Fallback imports for Vercel environment
-    try:
-        sys.path.append('/var/task')
-        sys.path.append('/var/runtime')
-        sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-        import convertWindow
-        import convertDoor
-        from app import process_cutting_data
-    except ImportError as e2:
-        logging.error(f"Fallback import error: {e2}")
-        # If imports still fail, we need to handle this gracefully
-        convertWindow = None
-        convertDoor = None
-        process_cutting_data = None
+    print(f"Warning: Could not import convertWindow: {e}")
+    convertWindow = None
+    convertWindow_available = False
+
+try:
+    import convertDoor
+    convertDoor_available = True
+except ImportError as e:
+    print(f"Warning: Could not import convertDoor: {e}")
+    convertDoor = None
+    convertDoor_available = False
+
+try:
+    from cutting_logic import process_cutting_data
+    process_cutting_data_available = True
+except ImportError as e:
+    print(f"Warning: Could not import process_cutting_data from cutting_logic: {e}")
+    process_cutting_data = None
+    process_cutting_data_available = False
 
 class handler(BaseHTTPRequestHandler):
     def do_OPTIONS(self):
@@ -53,7 +67,7 @@ class handler(BaseHTTPRequestHandler):
     def do_POST(self):
         try:
             # Check if required modules are available
-            if convertWindow is None or convertDoor is None or process_cutting_data is None:
+            if not convertWindow_available or not convertDoor_available or not process_cutting_data_available:
                 self.send_error_response(500, "Required modules not available. Import error occurred.")
                 return
                 
