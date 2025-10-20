@@ -117,6 +117,10 @@ class handler(BaseHTTPRequestHandler):
                 else:  # Door
                     df, _ = convertDoor.process_file(tmp_file_path)
                 
+                # Ensure file is closed before attempting to delete
+                import gc
+                gc.collect()
+                
                 # Process cutting data
                 success, message, result_df = process_cutting_data(df)
                 
@@ -162,27 +166,64 @@ class handler(BaseHTTPRequestHandler):
                     'filename': file_item.filename
                 }
                 
-                self.wfile.write(json.dumps(response_data).encode('utf-8'))
+                try:
+                    self.wfile.write(json.dumps(response_data).encode('utf-8'))
+                except (ConnectionAbortedError, BrokenPipeError) as conn_error:
+                    logging.warning(f"Connection aborted while sending response: {conn_error}")
+                    return  # Exit gracefully without raising exception
                 
             finally:
-                # Clean up temporary file
-                if os.path.exists(tmp_file_path):
-                    os.unlink(tmp_file_path)
+                # Clean up temporary file with better error handling
+                try:
+                    if os.path.exists(tmp_file_path):
+                        # Force garbage collection to release file handles
+                        import gc
+                        gc.collect()
+                        
+                        # Try to delete the file, with retry logic for Windows
+                        import time
+                        max_retries = 3
+                        for attempt in range(max_retries):
+                            try:
+                                os.unlink(tmp_file_path)
+                                break
+                            except PermissionError:
+                                if attempt < max_retries - 1:
+                                    time.sleep(0.1)  # Wait 100ms before retry
+                                    gc.collect()
+                                else:
+                                    logging.warning(f"Could not delete temporary file: {tmp_file_path}")
+                except Exception as cleanup_error:
+                    logging.warning(f"Error during cleanup: {cleanup_error}")
 
         except Exception as e:
             logging.error(f"Error processing file: {str(e)}")
             logging.error(traceback.format_exc())
-            self.send_error_response(500, f"Internal server error: {str(e)}")
+            
+            # Ensure we send a proper error response even if connection is aborted
+            try:
+                self.send_error_response(500, f"Internal server error: {str(e)}")
+            except (ConnectionAbortedError, BrokenPipeError) as conn_error:
+                logging.warning(f"Connection aborted while sending error response: {conn_error}")
+            except Exception as response_error:
+                logging.error(f"Failed to send error response: {response_error}")
 
     def send_error_response(self, status_code, message):
         """Send error response with proper headers"""
-        self.send_response(status_code)
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Content-Type', 'application/json')
-        self.end_headers()
-        
-        error_response = {
-            'success': False,
-            'message': message
-        }
-        self.wfile.write(json.dumps(error_response).encode('utf-8'))
+        try:
+            self.send_response(status_code)
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+            self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+            self.end_headers()
+            
+            error_response = {
+                'success': False,
+                'message': message
+            }
+            self.wfile.write(json.dumps(error_response).encode('utf-8'))
+        except (ConnectionAbortedError, BrokenPipeError) as conn_error:
+            logging.warning(f"Connection aborted while sending error response: {conn_error}")
+        except Exception as e:
+            logging.error(f"Failed to send error response: {e}")

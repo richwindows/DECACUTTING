@@ -110,7 +110,7 @@ def process_file(xlsm_file):
                 #     material_name = str(material_name) + "-WH"
                 
 
-                writer.writerow([""]+ [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] +[door_id_value] * 1 + [""] + ["TOP+BOT"] + [""] * 3 + [door_style_value] +[door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] *5 + [door_note_value] + [door_customer_Value])
+                writer.writerow([""]+ [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] +[door_id_value] * 1 + [""] + ["TOP+BOT"] + [""] * 3 + [door_style_value] +[door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] *5 + [door_note_value] + [door_customer_Value])
 
         
         # 从H列第4行开始遍历并写入写入130-01-
@@ -152,7 +152,7 @@ def process_file(xlsm_file):
                         break
 
 
-                writer.writerow([""]+ [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] +[door_id_value] * 1 + [""]  + ["TOP+BOT"] + [""] * 3 + [door_style_value] +[door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] *5 + [door_note_value] + [door_customer_Value])
+                writer.writerow([""]+ [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] +[door_id_value] * 1 + [""]  + ["TOP+BOT"] + [""] * 3 + [door_style_value] +[door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] *5 + [door_note_value] + [door_customer_Value])
 
 
 
@@ -195,7 +195,7 @@ def process_file(xlsm_file):
                         break
 
 
-                writer.writerow([""]+ [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] +[door_id_value] * 1 + [""]  + ["Left+Right"] + [""] * 3 + [door_style_value] +[door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] *5 + [door_note_value] + [door_customer_Value])
+                writer.writerow([""]+ [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] +[door_id_value] * 1 + [""]  + ["Left+Right"] + [""] * 3 + [door_style_value] +[door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] *5 + [door_note_value] + [door_customer_Value])
 
 
 
@@ -248,7 +248,7 @@ def process_file(xlsm_file):
                             
 
 
-                writer.writerow([""]+ [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] +[door_id_value] * 1 + [""] + ["TOP+BOT"] + [""] * 3 + [door_style_value] +[door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] *5 + [door_note_value] + [door_customer_Value])
+                writer.writerow([""]+ [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] +[door_id_value] * 1 + [""] + ["TOP+BOT"] + [""] * 3 + [door_style_value] +[door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] *5 + [door_note_value] + [door_customer_Value])
 
 
 
@@ -291,7 +291,7 @@ def process_file(xlsm_file):
                         break
 
 
-                writer.writerow([""]+ [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [door_id_value] * 1 + [""] + ["Left+Right"] + [""] * 3 + [door_style_value] +[door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] *5 + [door_note_value] + [door_customer_Value])
+                writer.writerow([""]+ [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] + [door_id_value] * 1 + [""] + ["Left+Right"] + [""] * 3 + [door_style_value] +[door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] *5 + [door_note_value] + [door_customer_Value])
 
 
         # 从L列第4行开始遍历并写入写入130-02-
@@ -331,9 +331,9 @@ def process_file(xlsm_file):
 
 
                 if material_pcs == 4:
-                    writer.writerow([batch_value] + [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [door_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [door_style_value] + [door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] * 5 + [door_note_value] + [door_customer_Value])  
+                    writer.writerow([batch_value] + [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [2] + [door_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [door_style_value] + [door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] * 5 + [door_note_value] + [door_customer_Value])  
                 else:
-                    writer.writerow([batch_value] + [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [door_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [door_style_value] + [door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] * 5 + [door_note_value] + [door_customer_Value])
+                    writer.writerow([batch_value] + [door_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] + [door_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [door_style_value] + [door_frame_value] + [""] * 1 + [""] + [door_grid_value] +[door_glass_value] + [door_Argon_value] + [""] * 5 + [door_note_value] + [door_customer_Value])
         
 
 
