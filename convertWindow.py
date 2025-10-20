@@ -203,7 +203,7 @@ def process_file(xlsm_file):
                 # 根据Color字段设置材料名称的颜色后缀
                 material_name = base_material_name + get_material_color_suffix(window_color_value)
 
-                writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1+ ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] +[window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] +[window_glass_value] + [window_Argon_value] + [""] *5 + [window_note_value] + [window_customer_Value])
+                writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1+ ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] +[window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] +[window_glass_value] + [window_Argon_value] + [""] *5 + [window_note_value] + [window_customer_Value])
 
 
         # 从I列第4行开始遍历并写入写入8210 |
@@ -257,7 +257,7 @@ def process_file(xlsm_file):
                 # 根据Color字段设置材料名称的颜色后缀
                 material_name = base_material_name + get_material_color_suffix(window_color_value)
 
-                writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] +[window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] +[window_glass_value] + [window_Argon_value] + [""] *5 + [window_note_value] + [window_customer_Value])
+                writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] +[window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] +[window_glass_value] + [window_Argon_value] + [""] *5 + [window_note_value] + [window_customer_Value])
 
 
         # 从K列第4行开始遍历并写入写入82-01 -
@@ -311,7 +311,7 @@ def process_file(xlsm_file):
                 # 根据Color字段设置材料名称的颜色后缀
                 material_name = base_material_name + get_material_color_suffix(window_color_value)
 
-                writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1+ ["TOP+BOT"] + [""] * 3 + [window_style_value] +[window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] +[window_glass_value] + [window_Argon_value] + [""] *5 + [window_note_value] + [window_customer_Value])
+                writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1+ ["TOP+BOT"] + [""] * 3 + [window_style_value] +[window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] +[window_glass_value] + [window_Argon_value] + [""] *5 + [window_note_value] + [window_customer_Value])
 
 
         # 从M列第4行开始遍历并写入写入8201 |
@@ -365,7 +365,7 @@ def process_file(xlsm_file):
                 # 根据Color字段设置材料名称的颜色后缀
                 material_name = base_material_name + get_material_color_suffix(window_color_value)
 
-                writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] +[window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] +[window_glass_value] + [window_Argon_value] + [""] *5 + [window_note_value] + [window_customer_Value])
+                writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] +[window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] +[window_glass_value] + [window_Argon_value] + [""] *5 + [window_note_value] + [window_customer_Value])
 
 
         
@@ -412,10 +412,10 @@ def process_file(xlsm_file):
                 material_name = base_material_name + get_material_color_suffix(window_color_value)
 
                 if material_pcs == 4:
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])  
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])  
                 else:
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
         
          # 从C列第4行开始遍历并写入82-03 |数据
         for row in range(4, sash_sheet.max_row + 1):
@@ -458,10 +458,10 @@ def process_file(xlsm_file):
                 material_name = base_material_name + get_material_color_suffix(window_color_value)
 
                 if material_pcs == 4:
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])  
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])  
                 else:
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
         
 
         # 从C列第4行开始遍历并写入82-05 |数据
@@ -505,10 +505,10 @@ def process_file(xlsm_file):
                 material_name = base_material_name + get_material_color_suffix(window_color_value)
 
                 if material_pcs == 4:
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])  
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])  
                 else:
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
         
 
 
@@ -553,10 +553,10 @@ def process_file(xlsm_file):
                 material_name = base_material_name + get_material_color_suffix(window_color_value)
 
                 if material_pcs == 4:
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])  
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])  
                 else:
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["TOP+BOT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
         
 
 
@@ -601,10 +601,10 @@ def process_file(xlsm_file):
                 material_name = base_material_name + get_material_color_suffix(window_color_value)
 
                 if material_pcs == 4:
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])  
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [2] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])  
                 else:
-                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [f"{frame_length_value:.6f}"] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
+                    writer.writerow([batch_value] + [window_id_value] * 1 + ["1"] + [material_name] + [""] * 2 + [frame_length_value] + ["V"] + [material_pcs] + [window_id_value] + [""] * 1 + ["LEFT+RIGHT"] + [""] * 3 + [window_style_value] + [window_frame_value] + [""] * 1 + [window_color_value] + [window_grid_value] + [window_glass_value] + [window_Argon_value] + [""] * 5 + [window_note_value] + [window_customer_Value])
         
 
 
